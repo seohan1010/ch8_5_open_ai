@@ -4,6 +4,8 @@
 :open-jdk-17 
 - springboot 버전 
 :3.0.4
+- gradle
+:7.6.4
 1. 의존성 
 - spring-core
 :spring-core:6.2.0
