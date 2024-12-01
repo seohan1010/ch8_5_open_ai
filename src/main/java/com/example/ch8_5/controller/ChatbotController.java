@@ -1,11 +1,15 @@
 package com.example.ch8_5.controller;
 
 import com.example.ch8_5.to.ChatbotMsg;
+import org.springframework.ai.embedding.EmbeddingModel;
+import org.springframework.ai.embedding.EmbeddingResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = {"http://localhost:3000", "*"})
@@ -13,6 +17,22 @@ import java.util.Map;
 @RequestMapping(value = "/chatbot")
 public class ChatbotController {
     Map<String, Object> map = null;
+
+
+    private final EmbeddingModel embeddingModel;
+
+    @Autowired
+    public ChatbotController(EmbeddingModel embeddingModel) {
+        this.embeddingModel = embeddingModel;
+    }
+
+    @GetMapping("/ai/embedding")
+    public Map embed(@RequestParam(value = "message", defaultValue = "Tell me a joke") String message) {
+        EmbeddingResponse embeddingResponse = this.embeddingModel.embedForResponse(List.of(message));
+        return Map.of("embedding", embeddingResponse);
+    }
+
+
 
     @RequestMapping(value = "/retrieve_msg", method = RequestMethod.POST)
     public ResponseEntity<Map<String, Object>> retrieveChatbotMsg(@RequestBody ChatbotMsg req) {
