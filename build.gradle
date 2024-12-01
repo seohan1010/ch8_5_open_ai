@@ -45,8 +45,6 @@ dependencies {
     // json으로 데이터를 받아오기 위해 필요 ---> 여기서 예외를 발생시키는거 같은데 이거는 나중에 확인해 봐야겠다.
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
 
-    // watsonx를 사용하기 위함
-    implementation 'org.springframework.ai:spring-ai-watsonx-ai-spring-boot-starter'
 
     // aop를 사용하기 위함
     implementation 'org.springframework.boot:spring-boot-starter-aop'
